@@ -204,7 +204,7 @@ public class Scoring : MonoBehaviour
 
 
     // Start is called before the first frame update
-    IEnumerator Start()
+    public void Start()
     {
 
         load = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<LoadScenes>();
@@ -221,15 +221,15 @@ public class Scoring : MonoBehaviour
         else
             table = "Cardio";
 
-        //recuperer toutes les parties du user
+        /*recuperer toutes les parties du user
         WWWForm form = new WWWForm();
         form.AddField("usernamePost", username);
         form.AddField("tablePost", table);
 
         WWW users = new WWW("http://chachaser.000webhostapp.com/ReadAllCardio.php", form);
         yield return users;
-
-        giantString = users.text;
+*/
+        giantString = ""; // = users.text
         if (giantString == "") // la premeiere partie du user
         {
             niv1 = true;
@@ -277,7 +277,7 @@ public class Scoring : MonoBehaviour
             else
             {
                 // total ==> max cpt
-                //s'il n'a tjr pas gagné la derniere partie , il doit la rejouer
+                /*s'il n'a tjr pas gagné la derniere partie , il doit la rejouer
                 WWWForm form2 = new WWWForm();
                 form2.AddField("usernamePost", username);
                 form2.AddField("cptPost", total.ToString());
@@ -285,8 +285,8 @@ public class Scoring : MonoBehaviour
 
                 WWW win = new WWW("http://chachaser.000webhostapp.com/RecupScore.php", form2);
                 yield return win;
-
-                giantString = win.text;
+*/
+                giantString = "F"; // = win.text
                 if (giantString == "F")
                 {
                     //il rejoue la partie
@@ -453,7 +453,7 @@ public class Scoring : MonoBehaviour
                 {
                     UnityEngine.Debug.Log("BRAVO !!");
                     FinDePartie.gagner = true;
-                    RegisterModif(username, scorePredit.ToString(), total.ToString(), table);
+                    //RegisterModif(username, scorePredit.ToString(), total.ToString(), table);
                     UnityEngine.Debug.Log("hayaaaaaaa");
                 }
             }
@@ -462,18 +462,19 @@ public class Scoring : MonoBehaviour
                 if (minutes == "00" || seconds == "00")
                 {
                     UnityEngine.Debug.Log("game over");
-                    Register(username, FirstTiming.ToString(), table, "F");
+                    //Register(username, FirstTiming.ToString(), table, "F");
                 }
                 else
                 {
                     UnityEngine.Debug.Log("BRAVO !!");
                     FinDePartie.gagner = true;
-                    Register(username, FirstTiming.ToString(), table, "T");
+                    //Register(username, FirstTiming.ToString(), table, "T");
                 }
 
             }
 
         }
+        /*
         else
         {
             if(partieFinie)
@@ -481,7 +482,7 @@ public class Scoring : MonoBehaviour
             else
                 Register(username, FirstTiming.ToString(), table, "F");
         }
-
+*/
         if(partieFinie)
             FinDePartie.gagner = true;
         else
